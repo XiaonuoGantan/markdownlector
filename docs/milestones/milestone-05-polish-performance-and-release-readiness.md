@@ -56,12 +56,13 @@ fixtures/
 ## Implementation Plan
 
 1. Polish visual hierarchy.
-   - Tune heading spacing.
+   - Use `DESIGN.md` as the editorial reference for restraint. The brand voice is quiet print magazine, not developer tools — visual choices should match that even though the medium is a terminal.
+   - Tune heading spacing. Generous breathing room before major headings (the terminal analogue of the 96px section rhythm in `DESIGN.md`).
    - Tune paragraph wrapping and margins.
-   - Tune code block framing.
-   - Tune blockquote left rule.
+   - Tune code block framing — quiet, not heavily decorated.
+   - Tune blockquote left rule using a single hairline character; do not stack glyphs.
    - Tune table fallback.
-   - Keep colors restrained and readable.
+   - Keep colors restrained and readable. No saturated accent; reserve color for `Error`/`Success` in the status line. Do not add a brand action color in the reader.
 
 2. Finish help and status text.
    - Help overlay exactly matches fixed keymap.
@@ -73,6 +74,7 @@ fixtures/
    - Add Ghostty profile guidance.
    - Recommend font and line-height settings without requiring them.
    - Explain that the app cannot set terminal fonts.
+   - Reference `DESIGN.md` for the intended reading aesthetic and recommend a profile that gets close: warm off-white background (akin to the `canvas` token, around `#f5f5f5`) with warm near-black foreground (akin to the `ink` token, around `#0c0a09`). Note this is a recommendation, not a runtime requirement — the reader must remain legible on common dark profiles too.
 
 4. Add performance smoke tests.
    - Use a committed large Markdown fixture or generated fixture inside the test.

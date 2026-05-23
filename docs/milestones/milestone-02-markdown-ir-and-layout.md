@@ -78,7 +78,7 @@ tests/
    - Each line contains spans plus plain searchable text.
    - Wrap paragraphs to width.
    - Preserve code block indentation.
-   - Add spacing around headings and major blocks.
+   - Add spacing around headings and major blocks. Follow the editorial-rhythm spirit in `DESIGN.md`: generous blank-line spacing before major headings (the terminal analogue of the 96px section rhythm), tighter spacing between related blocks. Exact line counts live in code; the principle is restraint, not density.
    - Degrade tables to aligned plain columns when width permits; otherwise stack rows conservatively.
 
 5. Add heading index generation.

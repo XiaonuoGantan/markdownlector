@@ -92,8 +92,17 @@ tests/
    - Clear only what is necessary for correctness.
 
 5. Implement theme.
+   - Follow the editorial restraint defined in `DESIGN.md`: no saturated brand accent, no rainbow syntax tones, no developer-tools neon. The reading surface should feel like quiet print, not a debugger.
+   - Style-role to terminal-attribute mapping (no hard-coded hex; map roles to terminal attributes that respect user theme):
+     - `Body` → default foreground (terminal "ink").
+     - `Muted` → dim attribute (the analogue of `body`/`muted` in `DESIGN.md`).
+     - `MutedSoft` → dim + faint, used for hairline-style separators and least-important status text.
+     - `Heading1`–`Heading6` → unstyled or single attribute (e.g. underline for H1, plain for the rest). Do not bold every heading. `DESIGN.md` keeps display weight at 300 deliberately; the terminal analogue is to avoid bold-everywhere and let spacing carry hierarchy.
+     - `Emphasis` → italic. `Strong` → bold (this is the only place bold belongs).
+     - `Code` → distinct but quiet (faint background or alternate foreground if the terminal supports it).
+     - `Error` and `Success` → reserved for the status line; never used to color body content.
    - Built-in dark/light adaptive palette if terminal background detection is simple and reliable.
-   - Otherwise default to a readable dark-compatible palette and leave adaptive detection for polish.
+   - Otherwise default to a readable palette that works against both common backgrounds and leave adaptive detection for polish.
    - Provide 256-color fallback only if it does not complicate the renderer.
 
 6. Implement status line.

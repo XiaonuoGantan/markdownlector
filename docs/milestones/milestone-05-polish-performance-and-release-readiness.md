@@ -23,7 +23,7 @@ Implement:
 
 - Visual polish for reader and picker.
 - Ghostty profile recommendation documentation.
-- Fixture-based performance checks.
+- Wall-clock performance confirmation (the <50 ms cold-open target). The structural no-full-repaint-per-keypress invariant is already guarded since Milestone 03a; this milestone confirms timing and watches for regressions.
 - Renderer snapshots for key Markdown elements.
 - Error message pass.
 - Release documentation.
@@ -49,8 +49,8 @@ DEPENDENCIES.md
 tests/
   performance_smoke.rs
   render_snapshots.rs
-fixtures/
-  large.md
+  fixtures/
+    large.md
 ```
 
 ## Implementation Plan
@@ -76,10 +76,12 @@ fixtures/
    - Explain that the app cannot set terminal fonts.
    - Reference `DESIGN.md` for the intended reading aesthetic and recommend a profile that gets close: warm off-white background (akin to the `canvas` token, around `#f5f5f5`) with warm near-black foreground (akin to the `ink` token, around `#0c0a09`). Note this is a recommendation, not a runtime requirement — the reader must remain legible on common dark profiles too.
 
-4. Add performance smoke tests.
-   - Use a committed large Markdown fixture or generated fixture inside the test.
+4. Confirm performance (do not discover it here).
+   - The "no full repaint per keypress" invariant is already asserted in Milestone 03a; this milestone does not re-derive it.
+   - Add the wall-clock cold-open benchmark: open a typical (~200-line) README and confirm it lands under the 50 ms target after cold process start.
+   - Use the shared large fixture (`tests/fixtures/large.md`, ~5,000 lines) to confirm navigation stays responsive.
    - Measure parse + layout time separately from terminal drawing where practical.
-   - Keep thresholds loose enough for CI variability but strict enough to catch accidental full re-render loops.
+   - Keep thresholds loose enough for CI variability but strict enough to catch a regression.
 
 5. Add render snapshots.
    - Headings.

@@ -4,6 +4,8 @@
 
 Implement Markdownlector's directory behavior: current-directory-scoped Markdown discovery, no-argument defaults, and a simple file picker.
 
+This milestone builds on the reader from Milestones 03a and 03b: the picker is a consumer of the reader, and the picker UI reuses the render and input loop proven there.
+
 This milestone completes the main product loop:
 
 ```text

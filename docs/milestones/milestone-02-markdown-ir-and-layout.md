@@ -10,6 +10,8 @@ bytes -> pulldown-cmark events -> compact document IR -> layout lines
 
 This milestone creates the semantic foundation needed for efficient rendering, heading navigation, search, resize behavior, and future viewport drawing. It also locks down two architectural bets early, where they are cheap to test: that positions (search matches, heading targets) anchor to stable IR offsets rather than layout lines, and that the layout cache stays proportional to source size rather than duplicating a full rendered copy.
 
+> **Architectural tripwire (from the M01 review).** M01's `src/plain.rs` is a dead-end `events -> text` pass: it preserves structural markers (heading text, list bullets, nesting indentation) but does no width-aware reflow. The moment a change would make `plain.rs` aware of a column width or wrap text, it has crossed from marker preservation into layout — stop and route that work through this milestone's layout engine and IR rather than growing `plain.rs`. The two paths share only the `markdown::parse` event stream; the layout pipeline is a second consumer of it, never a consumer of `plain`.
+
 ## User-Visible Behavior
 
 There may still be no full-screen UI. The key outcome is testable internal behavior:

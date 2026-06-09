@@ -1,0 +1,4 @@
+# Unix-only project: keep everything LF and stable across checkouts.
+* text=auto eol=lf
+*.md text eol=lf
+*.bin binary
